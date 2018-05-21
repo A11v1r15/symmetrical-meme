@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="style/main.css">
         <script type="text/javascript">
             window.onload = function () {
                 if (document.getElementById("txtLogin").value.length > 0) {
@@ -31,20 +32,20 @@
             }
         %>
         <div>Identificação com o usuário</div>
-        <form action="LoginServlet" method="post">
+        <form action="LoginServlet" method="post" class="login">
             <div>Login:</div>
             <div><input type="text" id="txtLogin" name="login" value="<%= login%>" /></div>
             <div>Senha:</div>
             <div><input type="password" id="txtSenha" name="senha" /></div>
             <div><input type="submit" value="Login" /></div>
-        </form>
-        <%
-            String mensagem = (String) request.getAttribute("msg");
-            if (mensagem != null) {
-        %>
-        <h1><%= mensagem%></h1>
-        <%
-            }
-        %>
+        </form> <div>
+            <%
+                String mensagem = (String) request.getAttribute("msg");
+                if (mensagem != null) {
+            %>
+            <h1><%= mensagem%></h1>
+            <%
+                }
+            %> </div>
     </body>
 </html>
