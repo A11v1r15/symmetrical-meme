@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : 02/04/2018, 21:19:06
-    Author     : leoomoreira
+    Created on : 21/05/2018, 20:45:36
+    Author     : aluno
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,42 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" href="style/main.css">
-        <script type="text/javascript">
-            window.onload = function () {
-                if (document.getElementById("txtLogin").value.length > 0) {
-                    document.getElementById("txtSenha").focus();
-                }
-            }
-        </script>
     </head>
     <body>
-        <%
-            String login = "";
-            Cookie[] cookies = request.getCookies();
-            for (int i = 0; cookies != null && i < cookies.length; i++) {
-                Cookie c = cookies[i];
-                if (c.getName().equals("smdapp.login")) {
-                    login = c.getValue();
-                    break;
-                }
-            }
-        %>
-        <div>Identificação com o usuário</div>
-        <form action="LoginServlet" method="post" class="login">
-            <div>Login:</div>
-            <div><input type="text" id="txtLogin" name="login" value="<%= login%>" /></div>
-            <div>Senha:</div>
-            <div><input type="password" id="txtSenha" name="senha" /></div>
-            <div><input type="submit" value="Login" /></div>
-        </form> <div>
-            <%
-                String mensagem = (String) request.getAttribute("msg");
-                if (mensagem != null) {
-            %>
-            <h1><%= mensagem%></h1>
-            <%
-                }
-            %> </div>
+        <div class="header">
+        <jsp:include page = "header.jsp"/>
+        </div>
+        <h1>Hello World!</h1>
     </body>
 </html>
