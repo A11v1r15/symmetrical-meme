@@ -5,20 +5,22 @@
  */
 package servlets;
 
+import Model.UsuarioDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Cookie;
 
 /**
  *
- * @author leoomoreira
+ * @author Alvaro
  */
-public class LogoutServlet extends HttpServlet {
+public class GameHandler extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,24 +31,11 @@ public class LogoutServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        session.invalidate();
-        Cookie[] cookies = request.getCookies();
-        Cookie cookie = null;
-        for (int i = 0; cookies != null && i < cookies.length; i++) {
-            Cookie c = cookies[i];
-            if (c.getName().equals("myapp.login")) {
-                cookie = c;
-                break;
-            }
-        }
-        if (cookie == null) {
-        request.setAttribute("msg", "<span class=\"alert label\">Sua sessão foi encerrada</span>");
-        } else {
-        request.setAttribute("msg", "<span class=\"sucess label\">Sua sessão foi encerrada, " + cookie.getValue().split("@")[0] + "</span>");}
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
+        UsuarioDAO dao = new UsuarioDAO();
+        dao.rewardPoints((String) session.getAttribute("login"), 9);
     }
 }

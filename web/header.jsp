@@ -1,51 +1,28 @@
 <%-- 
     Document   : index
     Created on : 02/04/2018, 21:19:06
-    Author     : leoomoreira
+    Author     : �lvaro
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" type="text/css" href="style/main.css">
-        <script type="text/javascript">
-            window.onload = function () {
-                if (document.getElementById("txtLogin").value.length > 0) {
-                    document.getElementById("txtSenha").focus();
-                }
-            }
-        </script>
-    </head>
-    <body>
-        <%
-            String login = "";
-            Cookie[] cookies = request.getCookies();
-            for (int i = 0; cookies != null && i < cookies.length; i++) {
-                Cookie c = cookies[i];
-                if (c.getName().equals("smdapp.login")) {
-                    login = c.getValue();
-                    break;
-                }
-            }
-        %>
-        <div>Identificação com o usuário</div>
-        <form action="LoginServlet" method="post" class="login">
-            <div>Login:</div>
-            <div><input type="text" id="txtLogin" name="login" value="<%= login%>" /></div>
-            <div>Senha:</div>
-            <div><input type="password" id="txtSenha" name="senha" /></div>
-            <div><input type="submit" value="Login" /></div>
-        </form> <div>
-            <%
-                String mensagem = (String) request.getAttribute("msg");
-                if (mensagem != null) {
-            %>
-            <h1><%= mensagem%></h1>
-            <%
-                }
-            %> </div>
-    </body>
-</html>
+<nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+        <li class="name"><h1><a href="/Symmetrical-meme">Symmetrical Meme</a></h1></li>
+        <li class="toggle-topbar menu-icon"><a href="/"><span></span></a></li>
+    </ul>
+    <section class="top-bar-section">
+        <ul class="left">
+            <li class="active"><a href="ListarUsuarioServlet">Ver Ranking</a></li>
+        </ul>
+        <% if (session.getAttribute("login") != null) {%>
+        <ul class="left">
+            <li class="active"><a href="TheGame">O Jogo</a></li>
+        </ul>
+        <%}%>
+        <ul class="right">
+            <jsp:include page = "loginButton.jsp"/>
+        </ul>
+        <ul class="right">
+            <jsp:include page = "siginButton.jsp"/>
+        </ul>
+    </section>
+</nav>
